@@ -10,14 +10,15 @@ ARCHIVO_SUCURSALES="maestros/sucursales.txt"
 CICLOS=0
 #while :
 #do
-	#Por cada archivo en el directorio de arribos  las verifico
+	#Por cada archivo en el directorio de arribos los verifico
 	#Mover al directorio aceptados o rechazados
 	for f in "$ARRIBOS_PATH"/* 
 	do
+	  VALIDO=true  
+
 	  if [ -f $f ] 
 	  then
 		echo "$f es un archivo regular."
-		VALIDO=true
 	  else
 		echo "$f no es un archivo regular."
 		VALIDO=false
@@ -26,10 +27,17 @@ CICLOS=0
 	  if [ -s $f ] 
 	  then
 		echo "$f no está vacio."
-		VALIDO=true
 	  else
 		echo "$f está vacio."
 		VALIDO=false
+	  fi
+
+	  if [ -f $PROCESADOS_PATH/"$(basename "$f")" ] 
+	  then
+		echo "Ya ha sido procesado."
+		VALIDO=false
+	  else
+		echo "No ha sido procesado."
 	  fi
 
 	  if [ $VALIDO = true ]
