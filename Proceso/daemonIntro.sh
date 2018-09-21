@@ -7,7 +7,15 @@ SALIDA_PATH="salida"
 PROCESADOS_PATH="procesados"
 ARCHIVO_OPERADORES="maestros/operadores.txt"
 ARCHIVO_SUCURSALES="maestros/sucursales.txt"
+CONF="conf"
+LOG="$CONF/log"
 CICLOS=0
+
+log ()
+{
+        date +"%x %X-$USER-$1-$2-$3" >> "$LOG/daemon.log" 
+}
+
 #while :
 #do
 	#Mando a rechazados todos los archivos que no cumplan con el formato de entrega_mesMenorOIgualAlCorriente
@@ -16,13 +24,21 @@ CICLOS=0
 	#MES=5
 	if (($MES < 10))
 	then
-		find "$ARRIBOS_PATH" -type f -not -name "entregas_0[1-$MES].txt" -exec mv {} $RECHAZADOS_PATH \;
+		find "$ARRIBOS_PATH" -type f -not -name "entregas_0[1-$MES].txt" |
+			while read file
+				do log "daemon" "INF" "$file tiene un nombre incorrecto. Ha sido rechazado"
+				mv $file $RECHAZADOS_PATH
+			done
 	fi
 
 	if (($MES > 9))
 	then
 		let "MES=$MES - 10"
-		find "$ARRIBOS_PATH" -type f -not -name "entregas_0[1-9].txt" -and -not -name "entregas_[1][0-$MES].txt" -exec mv {} $RECHAZADOS_PATH \;
+		find "$ARRIBOS_PATH" -type f -not -name "entregas_0[1-9].txt" -and -not -name "entregas_[1][0-$MES].txt" |
+			while read file
+				do log "daemon" "INF" "$file tiene un nombre incorrecto. Ha sido rechazado"
+				mv $file $RECHAZADOS_PATH
+			done
 	fi
 
 
@@ -32,37 +48,31 @@ CICLOS=0
 	do
 	  VALIDO=true  
 
-	  if [ -f $f ] 
+	  if ! [ -f $f ] 
 	  then
-		echo "$f es un archivo regular."
-	  else
-		echo "$f no es un archivo regular."
+		log "daemon" "INF" "$f no es un archivo regular"
 		VALIDO=false
 	  fi
 
-	  if [ -s $f ] 
+	  if ! [ -s $f ] 
 	  then
-		echo "$f no está vacio."
-	  else
-		echo "$f está vacio."
+		log "daemon" "INF" "$f está vacio"
 		VALIDO=false
 	  fi
 
 	  if [ -f $PROCESADOS_PATH/"$(basename "$f")" ] 
 	  then
-		echo "Ya ha sido procesado."
+		log "daemon" "INF" "$f ya ha sido procesado"
 		VALIDO=false
-	  else
-		echo "No ha sido procesado."
 	  fi
 
 	  if [ $VALIDO = true ]
 	  then
 		mv $f $ACEPTADOS_PATH
-		echo "se movio a aceptados"
+		log "daemon" "INF" "$f ha sido aceptado"
 	  else		
 		mv $f $RECHAZADOS_PATH
-		echo "se movio a rechazados"
+		log "daemon" "INF" "$f ha sido rechazado"
 	  fi
 	done
 
