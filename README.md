@@ -4,7 +4,7 @@
 ********************************************
 
 # Requisitos del sistema
-
+¿Se requiere algo?
 
 
 
@@ -20,11 +20,21 @@
 
 # Instalación
 - Ubicado en el directorio, ejecutar por la terminal el comando . install.sh
+- ...
 
 
 
 
 # Instrucciones de ejecución
-- Ir al directorio de ejecutables y
+- Ir al directorio de ejecutables y...
+Explicar como se inicializa
 
-- 
+Explicar uso de Start y Stop
+¿"Proceso" SIEMPRE es llamado por Start y solo por Start?
+
+
+# Estructuras
+Un listado de las estructuras definidas en el excel...
+
+# Listado de archivos de prueba
+Propios y de la cátdra...
