@@ -1,0 +1,6 @@
+# Hipótesis
+- Nombre del subdirectorio donde se va a hacer un backup del paquete original:
+- xxxxxx controla el comando para determinar que no está o no está bien instalado y cuando es posible reparar.
+- El separador de campos que se emplea en el input es ;
+- El control para que el Proceso no se ejecute cuando el sistema no fue inicializado se realiza en xxxxxxxxx  ¿alguna parte de Start?
+- El control para que no se ejecuten dos procesos simultáneos se realiza en xxxxxx  ¿alguna parte de Start?
