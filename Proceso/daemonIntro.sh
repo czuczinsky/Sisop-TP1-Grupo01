@@ -10,6 +10,22 @@ ARCHIVO_SUCURSALES="maestros/sucursales.txt"
 CICLOS=0
 #while :
 #do
+	#Mando a rechazados todos los archivos que no cumplan con el formato de entrega_mesMenorOIgualAlCorriente
+	MES=`date +"%m"`
+	MES=$(expr $MES + 0 )
+	#MES=5
+	if (($MES < 10))
+	then
+		find "$ARRIBOS_PATH" -type f -not -name "entregas_0[1-$MES].txt" -exec mv {} $RECHAZADOS_PATH \;
+	fi
+
+	if (($MES > 9))
+	then
+		let "MES=$MES - 10"
+		find "$ARRIBOS_PATH" -type f -not -name "entregas_0[1-9].txt" -and -not -name "entregas_[1][0-$MES].txt" -exec mv {} $RECHAZADOS_PATH \;
+	fi
+
+
 	#Por cada archivo en el directorio de arribos los verifico
 	#Mover al directorio aceptados o rechazados
 	for f in "$ARRIBOS_PATH"/* 
