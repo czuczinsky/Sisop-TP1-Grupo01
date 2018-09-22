@@ -176,11 +176,11 @@ then
         else
                 instalacion
         fi
-elif [ "$1" == "-r" ]
+elif [ "$#" == "1" ] && [ "$1" == "-r" ] && [ -e "conf/tpconfig.txt" ]
 then
         # reparacion
         modo_reparacion
 else
         #mensaje de ayuda
-        :
+        echo "Mensaje de ayuda"
 fi
