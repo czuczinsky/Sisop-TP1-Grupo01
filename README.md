@@ -20,9 +20,11 @@
 # Instalación
 - Ubicado en el directorio Grupo01, ejecutar por la terminal el comando ./instalacion.sh
 - Se pedira configurar los directorios de ejecutables, maestros, novedades, aceptados, rechazados, procesados, salida. Usted podrá ingresar una ruta, y si no ingresa una se asignará una ruta por defecto.
-- Se pedirá una cnofirmación de la información ingresada.
+- Se pedirá una confirmación de la información ingresada. Si ingresa s se completará la instalación y si ingresa n se volverán a solicitar los directorios.
 
 (Nota: si el sistema ya ha sido correctamente instalado, la ejecución del comando ./instalacion.sh solo mostrará los directorios de la instalación)
+
+- Para reparar el sistema ingrese al directorio Grupo01 y ejecute el comando ./instalacion.sh -r
 
 
 
