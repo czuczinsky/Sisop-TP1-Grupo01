@@ -26,9 +26,7 @@ while read linea; do
     key=$(echo "$linea" | cut -d- -f1)
     ruta=$(echo "$linea" | cut -d- -f2)
     user=$(echo "$linea" | cut -d- -f3)
-echo "$key"
-echo "$ruta"
-echo "$user"
+if [ $inicializado -eq 0 ]; then
     case "$key" in
         MAESTROS) export MAESTROS=$ruta;;
         EJECUTABLES) export EJECUTABLES=$ruta;;
@@ -42,13 +40,9 @@ echo "$user"
 	GRUPO) export GRUPO=$ruta;;
 	
     esac
-    if [[ -z $flag ]]; then flag=$user; fi
-
-
-    if [[ $flag != $user ]]; then
-      reportar "Error de usuario, tiene que ser el mismo para todas rutas" 
-      log "inicializador" "INF" "Error de usuario, tiene que ser el mismo para todas rutas"
-    fi
+    
+fi
+    
 done < "$GRUPO/conf/tpconfig.txt"
 
 log "inicializador" "INF" "cambio de permisos en MAESTROS y EJECUTABLES"
@@ -56,7 +50,7 @@ echo "cambio de permisos en MAESTROS y EJECUTABLES"
 find "$MAESTROS" -type f -exec chmod u+r {} +
 find "$EJECUTABLES" -type f -exec chmod u+rx {} +
 
-for x in MAESTROS EJECUTABLES ACEPTADOS RECHAZADOS VALIDADOS REPORTES LOGS; do
+for x in MAESTROS EJECUTABLES ACEPTADOS RECHAZADOS SALIDA NOVEDADES LOGS; do
     if [ -v $x ]; then
         echo "no esta $x en archivo de configuracion"
 	log "inicializador" "INF" "no esta $x en archivo de configuracion"
@@ -70,6 +64,6 @@ for x in MAESTROS EJECUTABLES ACEPTADOS RECHAZADOS VALIDADOS REPORTES LOGS; do
     fi
 done
 
-$EJECUTABLES/start.sh
+$EJECUTABLES/START.sh
 
 	
