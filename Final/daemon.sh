@@ -133,7 +133,7 @@ validoNovedades()
 		trailer_codigo_postal=$codigo_postal
 		trailer_cantidad_lineas=$doc_numero
 		echo "traileres" $trailer_codigo_postal " " $trailer_cantidad_lineas
-	  done < $f
+	  done < "$ACEPTADOS_PATH/$f"
 	  echo "Total lineas" $cantidad_lineas
 	  echo "Suma codigo postal" $codigo_postal_suma
 	  #Comparo cantidad de lineas del archivo y suma codigo postal con los trailers
