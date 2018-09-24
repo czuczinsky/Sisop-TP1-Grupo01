@@ -28,12 +28,15 @@
 
 
 
-# Instrucciones de ejecución
+# Instrucciones de inicialización
 - Ir al directorio de ejecutables y ejecutar el comando ./inicializador.sh
-¿Se llama solo o instalación llama a inicialización?
+- Se informará si se inicializa por primera vez, si ya ha sido inicializado o, en caso de no estar dadas las condiciones para inicializarse, los componentes faltante junto a un mensaje de como reparar el sistema.
+- Una vez completada la inicialización con éxito, el sistema estará en pleno funcionamiento.con el proceso daemon corriendo.
 
-Explicar uso de Start y Stop
-¿"Proceso" SIEMPRE es llamado por Start y solo por Start?
+# Uso
+- Con el proceso daemon funcionando, se puede detener ubicandose en el directorio ejecutables y escribiendo el comando ./STOP.SH el cual informa si sea ha detenido el proceso o si no había proceso funcionando que detener.
+- Para volver a iniciar el proceso daemon, ubicado en el directorio ejecutables, ingrese el comando .START.SH el cual volverá a poner en funcionamiento el proceso daemon, siempre y cuando estén dadas las condiciones (variables inicializadas, directorios y archivos maestros disponibles/accesibles). En caso de que ya se encuentre un proceso daemon corriendo, no se correra uno adicional y se informará de la situación.
+- 
 
 
 # Estructuras
