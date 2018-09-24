@@ -7,7 +7,7 @@ SALIDA_PATH="salida"
 PROCESADOS_PATH="procesados"
 ARCHIVO_OPERADORES="maestros/operadores.txt"
 ARCHIVO_SUCURSALES="maestros/sucursales.txt"
-CICLOS=0
+CICLO=0
 #while :
 #do
 	#Por cada archivo en el directorio de aceptados
@@ -49,8 +49,7 @@ CICLOS=0
 		#loggear
 	  fi	
 	done
-
-	#Ya tengo los archivos validados, empiezo a procesesar
+ 	#Ya tengo los archivos validados, empiezo a procesesar
 	#Es lo mismo que arriba, capaz conviene hacer todo en el mismo loop
 	#PROCESANDO EL CONTENIDO DEL ARCHIVO
 	for f in "$ACEPTADOS_PATH"/*
@@ -75,14 +74,26 @@ CICLOS=0
 		#verificar operador vigente
 
 		#si ok, genero o agrego a archivo correspondiente y escribo registro en el archivo
-		echo $pieza $nombre $doc_tipo $doc_numero $codigo_postal >> $SALIDA_PATH/"Entregas_"$operador
+		#completo con ceros
+		printf -v pieza '%020d' $pieza
+	        nombre=$(echo $nombre | awk '$1=$1')
+		#completo con espacios
+	       	printf -v nombre_pad '%50s' $nombre
+		printf -v doc_numero '%011d' $doc_numero
+		archivo=$(basename "$f")
+	        codigo_suc_destino=$(awk -v codigo=$codigo -F ";" '{if($6 == codigo) {print $1 } }' "$ARCHIVO_SUCURSALES")
+		suc_destino=$(awk -v codigo=$codigo -F ";" '{if($6 == codigo) {print $2 } }' "$ARCHIVO_SUCURSALES")
+	        direccion_suc_destino=$(awk -v codigo=$codigo -F ";" '{if($6 == codigo) {print $3 } }' "$ARCHIVO_SUCURSALES")
+		costo_entrega=$(awk -v codigo=$codigo -F ";" '{if($6 == codigo) {print $8 } }' "$ARCHIVO_SUCURSALES")
+		echo $suc_destino
+		echo $pieza"$nombre_pad"$doc_tipo$doc_numero$codigo_postal$codigo_suc_destino$suc_destino$direccion_suc_destino$costo_entrega$archivo >> $SALIDA_PATH/"Entregas_"$operador
 	  done < $f
 	  #Fin proceso, mover archivo a procesado
-	  mv $f $PROCESADOS_PATH
+	  #mv $f $PROCESADOS_PATH
 
 	done
 
-	let "CICLOS=CICLOS+1"
+	let "CICLO=CICLO+1"
 	echo "Numero de ciclo: " $CICLO
-	sleep 1m
+	#sleep 1m
 #done
