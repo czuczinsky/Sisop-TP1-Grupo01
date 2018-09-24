@@ -81,6 +81,31 @@ return
 
 }
 
+function permisoEjecutables(){
+
+        START="$EJECUTABLES/START.sh"
+        STOP="$EJECUTABLES/STOP.sh"
+        INICIALIZACION="$EJECUTABLES/inicializacion.sh"
+        PROCESO="$EJECUTABLES/daemon.sh"
+
+
+#chequeo que tengan permiso de ejecucion
+
+        if [ ! -x $START ] || [ ! -x $STOP ] \
+        || [ ! -x $INICIALIZACION ] || [ ! -x $PROCESO ]; then
+
+        #no tienen permiso de ejecucion
+        echo 1
+        return
+
+        fi
+
+echo 0
+return
+
+}
+
+
 function existenDirectorios(){
 
 
@@ -108,6 +133,11 @@ if [ `existenDirectorios` -eq 1 ] ; then
         return 1
 fi
 
+if [ `permisoEjecutables` -eq 1 ] ; then
+        echo "Error: Los ejecutables no tienen permiso de ejecución"
+        log "START" "ERR" "Los ejecutables no tienen permiso de ejecución"
+        return 1
+fi
 
 if [ `existenArchivosMaestros` -eq 1 ] ; then
         echo "Error: Archivos maestros no disponibles/accesibles"
