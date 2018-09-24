@@ -142,11 +142,11 @@ validoNovedades()
 	  if [ $cantidad_lineas -eq $trailer_cantidad_lineas ] && [ $codigo_postal_suma -eq $trailer_codigo_postal ];
 	  then
 		echo $f " archivo valido"
-		#loggear 
+		log "proceso" "INF" "El archivo $f tiene un trailer correcto"
 	  else
 		echo $f " archivo invalido"
+		log "proceso" "INF" "El archivo $f tiene un trailer incorrecto"
 		mv $f "$RECHAZADOS_PATH"
-		#loggear
 	  fi	
 	done
  	#Ya tengo los archivos validados, empiezo a procesesar
@@ -178,15 +178,18 @@ validoNovedades()
 		printf -v pieza '%020d' $pieza
 	        nombre=$(echo $nombre | awk '$1=$1')
 		#completo con espacios
-	       	printf -v nombre_pad '%50s' $nombre
+	       	printf -v nombre_pad '%48s' "$nombre"
 		printf -v doc_numero '%011d' $doc_numero
 		archivo=$(basename "$f")
 	        codigo_suc_destino=$(awk -v codigo=$codigo_postal -F ";" '{ if($6 == codigo) {print $1 } }' "$ARCHIVO_SUCURSALES")
+		printf -v codigo_suc_destino '%3s' $codigo_suc_destino
 		suc_destino=$(awk -v codigo=$codigo_postal -F ";" '{ if($6 == codigo) {print $2 } }' "$ARCHIVO_SUCURSALES")
+		printf -v suc_destino '%25s' "$suc_destino"
 	        direccion_suc_destino=$(awk -v codigo=$codigo_postal -F ";" '{if($6 == codigo) {print $3 } }' "$ARCHIVO_SUCURSALES")
+		printf -v direccion_suc_destino '%25s' "$direccion_suc_destino"
 		costo_entrega=$(awk -v codigo=$codigo_postal -F ";" '{ if($6 == codigo) {print $8 } }' "$ARCHIVO_SUCURSALES")
 		printf -v costo_entrega '%06d' $costo_entrega
-		echo $pieza"$nombre_pad"$doc_tipo$doc_numero$codigo_postal$codigo_suc_destino$suc_destino$direccion_suc_destino$costo_entrega$archivo >> $SALIDA_PATH/"Entregas_"$operador
+		echo $pieza"$nombre_pad"$doc_tipo$doc_numero$codigo_postal"$codigo_suc_destino""$suc_destino""$direccion_suc_destino"$costo_entrega$archivo >> $SALIDA_PATH/"Entregas_"$operador
 	  done < $f
 	  #Fin proceso, mover archivo a procesado
 	  #mv $f $PROCESADOS_PATH
