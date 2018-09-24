@@ -81,11 +81,11 @@ CICLO=0
 	       	printf -v nombre_pad '%50s' $nombre
 		printf -v doc_numero '%011d' $doc_numero
 		archivo=$(basename "$f")
-	        codigo_suc_destino=$(awk -v codigo=$codigo -F ";" '{if($6 == codigo) {print $1 } }' "$ARCHIVO_SUCURSALES")
-		suc_destino=$(awk -v codigo=$codigo -F ";" '{if($6 == codigo) {print $2 } }' "$ARCHIVO_SUCURSALES")
-	        direccion_suc_destino=$(awk -v codigo=$codigo -F ";" '{if($6 == codigo) {print $3 } }' "$ARCHIVO_SUCURSALES")
-		costo_entrega=$(awk -v codigo=$codigo -F ";" '{if($6 == codigo) {print $8 } }' "$ARCHIVO_SUCURSALES")
-		echo $suc_destino
+	        codigo_suc_destino=$(awk -v codigo=$codigo_postal -F ";" '{ if($6 == codigo) {print $1 } }' "$ARCHIVO_SUCURSALES")
+		suc_destino=$(awk -v codigo=$codigo_postal -F ";" '{ if($6 == codigo) {print $2 } }' "$ARCHIVO_SUCURSALES")
+	        direccion_suc_destino=$(awk -v codigo=$codigo_postal -F ";" '{if($6 == codigo) {print $3 } }' "$ARCHIVO_SUCURSALES")
+		costo_entrega=$(awk -v codigo=$codigo_postal -F ";" '{ if($6 == codigo) {print $8 } }' "$ARCHIVO_SUCURSALES")
+		printf -v costo_entrega '%06d' $costo_entrega
 		echo $pieza"$nombre_pad"$doc_tipo$doc_numero$codigo_postal$codigo_suc_destino$suc_destino$direccion_suc_destino$costo_entrega$archivo >> $SALIDA_PATH/"Entregas_"$operador
 	  done < $f
 	  #Fin proceso, mover archivo a procesado
