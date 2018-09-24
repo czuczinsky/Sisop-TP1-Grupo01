@@ -1,5 +1,12 @@
 #! /bin/bash
 
+# RAIZ
+GRUPO=$(pwd | sed "s-\(.*Grupo01\).*-\1-")
+
+# DIRECTORIOS RESERVADOS
+CONF="$GRUPO/conf"
+LOG="$CONF/log"
+
 ARRIBOS_PATH="$NOVEDADES"
 ACEPTADOS_PATH="$ACEPTADOS"
 RECHAZADOS_PATH="$RECHAZADOS"
@@ -8,8 +15,101 @@ PROCESADOS_PATH="$PROCESADOS"
 ARCHIVO_OPERADORES="$MAESTROS/operadores.txt"
 ARCHIVO_SUCURSALES="$MAESTROS/sucursales.txt"
 CICLO=0
+
+log ()
+{
+        date +"%x %X-$USER-$1-$2-$3" >> "$LOG/proceso.log" 
+}
+
+validoNombreDeNovedades()
+{
+	#Mando a rechazados todos los archivos de "novedades" cuyo nombre no cumplen con el formato de entrega_mesMenorOIgualAlCorriente
+	MES=`date +"%m"`
+	MES=$(expr $MES + 0 )
+	#MES=5
+	if (( $MES < 10 ))
+		then
+			find "$NOVEDADES_PATH" -type f -not -name "entregas_0[1-$MES].txt" |
+				while read file
+				do
+					if [ -f "$file" ]
+					then
+						log "proceso" "INF" "$file tiene un nombre incorrecto. Ha sido rechazado"
+						mv "$file" $RECHAZADOS_PATH
+					fi
+				done
+		fi
+
+		if (( $MES > 9 ))
+		then
+			let "MES=$MES - 10"
+			find "$NOVEDADES_PATH" -type f -not -name "entregas_0[1-9].txt" -and -not -name "entregas_[1][0-$MES].txt" |
+				while read file
+				do
+					if [ -f "$file" ]
+					then
+						log "proceso" "INF" "$file tiene un nombre incorrecto. Ha sido rechazado"
+						mv "$file" $RECHAZADOS_PATH
+					fi
+				done
+		fi
+}
+
+validoNovedades()
+{
+	#Verifico cada archivo que quedo en el directorio de "novedades"
+	#Mover al directorio aceptados o rechazados
+	for f in "$NOVEDADES_PATH"/* 
+	do
+		VALIDO=true  
+
+		if ! [ -f $f ] 
+		then
+			log "proceso" "INF" "$f no es un archivo regular"
+			VALIDO=false
+	 	fi
+
+	  	if ! [ -s $f ] 
+		then
+			log "proceso" "INF" "$f está vacio"
+			VALIDO=false
+		fi
+
+		if [ -f $PROCESADOS_PATH/"$(basename "$f")" ] 
+		then
+			log "proceso" "INF" "$f ya ha sido procesado"
+			VALIDO=false
+		fi
+
+		if [ $VALIDO = true ]
+		then
+			mv $f $ACEPTADOS_PATH
+			log "proceso" "INF" "$f ha sido aceptado"
+		else		
+			mv $f $RECHAZADOS_PATH
+			log "proceso" "INF" "$f ha sido rechazado"
+	 	fi
+	done
+}
+
 #while :
 #do
+	#Verifico que sean validos los archivos de novedades
+	#Mando a aceptados o rechazados segun corresponda
+	let "CICLOS=CICLOS+1"
+	log "proceso" "INF" "Nº de ciclo: $CICLOS"
+
+	if [ "$(ls -A $NOVEDADES_PATH)" ]
+	then	
+		validoNombreDeNovedades
+	fi
+
+	if [ "$(ls -A $NOVEDADES_PATH)" ]
+	then	
+		validoNovedades
+	fi
+
+
 	#Por cada archivo en el directorio de aceptados
 	#Verifico que sean validos para procesar o los muevo a rechazados
 	for f in "$ACEPTADOS_PATH"/* 
