@@ -27,7 +27,7 @@ function obtenerPIDProceso(){
 	#Busco en la lista de procesos en ejecucion el proceso que deseo detener
 	#-w obliga a que PATRÓN coincida solamente con palabras completas
 
-        PID=`ps ax | grep -v $$ | grep -v grep | grep -w $PROCESOABUSCAR`
+        PID=`ps ax | grep bash | grep -v $$ | grep -v grep | grep -w $PROCESOABUSCAR`
 
 	#Me quedo unicamente con el PID
 	PID=`echo $PID | cut -f 1 -d ' '`
