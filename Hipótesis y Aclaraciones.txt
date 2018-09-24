@@ -4,3 +4,6 @@
 - El separador de campos que se emplea en el input es ;
 - El control para que el Proceso no se ejecute cuando el sistema no fue inicializado se realiza dentro de START.SH usando la función variablesInicializadas() 
 - El control para que no se ejecuten dos procesos simultáneos se realiza dentro de START.SH usando la función obtenerPIDProceso()
+
+# Aclaraciones
+- Para el correcto funcionamiento del sistema, el proceso daemon solo se debe inicializar mediante la primera inicializacion del sistema o con el comando START luego de que un proceso se haya detenido.
