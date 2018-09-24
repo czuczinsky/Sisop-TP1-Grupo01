@@ -93,7 +93,7 @@ function permisoEjecutables(){
 #chequeo que tengan permiso de ejecucion
 
         if [ ! -x "$START" ] || [ ! -x "$STOP" ] \
-        || [ ! -x "$INICIALIZACION"" ] || [ ! -x "$PROCESO" ]; then
+        || [ ! -x "$INICIALIZACION" ] || [ ! -x "$PROCESO" ]; then
 
         #no tienen permiso de ejecucion
         echo 1
