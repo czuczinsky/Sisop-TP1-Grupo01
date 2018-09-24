@@ -39,13 +39,13 @@
 
 
 # Estructuras
-maestros/Operadores.txt
-maestros/Sucursales.txt
-Grupo01/conf/tpconfig.txt
+- maestros/Operadores.txt
+- maestros/Sucursales.txt
+- Grupo01/conf/tpconfig.txt
 
 # Listado de archivos de prueba
-novedades/entregas_03.txt
-novedades/entregas_04.txt
-novedades/entregas_05.txt
-novedades/entregas_06.txt
-novedades/entregas_07.txt
+- novedades/entregas_03.txt
+- novedades/entregas_04.txt
+- novedades/entregas_05.txt
+- novedades/entregas_06.txt
+- novedades/entregas_07.txt
