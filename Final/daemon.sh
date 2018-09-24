@@ -35,7 +35,7 @@ validoNombreDeNovedades()
 					if [ -f "$file" ]
 					then
 						log "proceso" "INF" "$file tiene un nombre incorrecto. Ha sido rechazado"
-						mv "$file" $RECHAZADOS_PATH
+						mv "$file" "$RECHAZADOS_PATH"
 					fi
 				done
 		fi
@@ -49,7 +49,7 @@ validoNombreDeNovedades()
 					if [ -f "$file" ]
 					then
 						log "proceso" "INF" "$file tiene un nombre incorrecto. Ha sido rechazado"
-						mv "$file" $RECHAZADOS_PATH
+						mv "$file" "$RECHAZADOS_PATH"
 					fi
 				done
 		fi
@@ -59,7 +59,7 @@ validoNovedades()
 {
 	#Verifico cada archivo que quedo en el directorio de "novedades"
 	#Mover al directorio aceptados o rechazados
-	for f in "$NOVEDADES_PATH"/* 
+	for f in "$NOVEDADES_PATH"/*
 	do
 		VALIDO=true  
 
@@ -75,7 +75,7 @@ validoNovedades()
 			VALIDO=false
 		fi
 
-		if [ -f $PROCESADOS_PATH/"$(basename "$f")" ] 
+		if [ -f "$PROCESADOS_PATH/$(basename "$f")" ] 
 		then
 			log "proceso" "INF" "$f ya ha sido procesado"
 			VALIDO=false
@@ -83,10 +83,10 @@ validoNovedades()
 
 		if [ $VALIDO = true ]
 		then
-			mv $f $ACEPTADOS_PATH
+			mv $f "$ACEPTADOS_PATH"
 			log "proceso" "INF" "$f ha sido aceptado"
 		else		
-			mv $f $RECHAZADOS_PATH
+			mv $f "$RECHAZADOS_PATH"
 			log "proceso" "INF" "$f ha sido rechazado"
 	 	fi
 	done
@@ -145,7 +145,7 @@ validoNovedades()
 		#loggear 
 	  else
 		echo $f " archivo invalido"
-		mv $f $RECHAZADOS_PATH
+		mv $f "$RECHAZADOS_PATH"
 		#loggear
 	  fi	
 	done

@@ -55,9 +55,8 @@ find "$EJECUTABLES" -type f -exec chmod u+rx {} +
 
 for x in "$MAESTROS" "$EJECUTABLES" "$ACEPTADOS" "$RECHAZADOS" "$SALIDA" "$NOVEDADES" "$LOG"; do
 
-    echo "************$x"
-
-    if [ ! -z "$x" ]; then
+    if [ -z "$x" ]; then
+        echo "$x"
         echo "no esta $x en archivo de configuracion"
 	    log "inicializador" "INF" "no esta $x en archivo de configuracion"
     else
@@ -70,15 +69,6 @@ for x in "$MAESTROS" "$EJECUTABLES" "$ACEPTADOS" "$RECHAZADOS" "$SALIDA" "$NOVED
     	log "inicializador" "INF" "directorio de $x no existe falta un componente"
     fi
     
-    sleep 5s
-    
 done
 
-if [ ! -z "$MAESTROS" ]
-then
-    echo "MAESTROS TIENE ALGO"
-fi
-
-#. "$EJECUTABLES"/START.sh
-
-	
+. "$EJECUTABLES"/START.sh

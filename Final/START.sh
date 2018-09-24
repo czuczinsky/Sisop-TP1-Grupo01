@@ -17,9 +17,9 @@ CONF="$GRUPO/conf"
 LOG="$CONF/log"
 
 #para obtener las variables que necesito
-source "$EJECUTABLES/inicializador.sh"
+#source "$EJECUTABLES/inicializador.sh"
 
-sleep 5s
+#sleep 5s
 
 log ()
 {
@@ -123,7 +123,7 @@ PID_BUSCADO=`obtenerPIDProceso daemon.sh`
 #si no esta corriendo hago que empiece a correr
 if [ -z "$PID_BUSCADO" ] ; then
     
-    #. "$EJECUTABLES/daemon.sh" &
+    . "$EJECUTABLES/daemon.sh" &
 	PID_BUSCADO=`obtenerPIDProceso daemon.sh`
 	log "START" "INF" "El Demonio ha sido iniciado  bajo el PID: $PID_BUSCADO"
 else 
