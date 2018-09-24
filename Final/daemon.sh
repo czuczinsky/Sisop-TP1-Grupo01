@@ -1,19 +1,19 @@
 #! /bin/bash
 
 # RAIZ
-GRUPO=$(pwd | sed "s-\(.*Grupo01\).*-\1-")
+# GRUPO=$(pwd | sed "s-\(.*Grupo01\).*-\1-")
 
 # DIRECTORIOS RESERVADOS
 CONF="$GRUPO/conf"
 LOG="$CONF/log"
 
-ARRIBOS_PATH="$NOVEDADES"
+NOVEDADES_PATH="$NOVEDADES"
 ACEPTADOS_PATH="$ACEPTADOS"
 RECHAZADOS_PATH="$RECHAZADOS"
 SALIDA_PATH="$SALIDA"
 PROCESADOS_PATH="$PROCESADOS"
-ARCHIVO_OPERADORES="$MAESTROS/operadores.txt"
-ARCHIVO_SUCURSALES="$MAESTROS/sucursales.txt"
+ARCHIVO_OPERADORES="$MAESTROS/operadores.csv"
+ARCHIVO_SUCURSALES="$MAESTROS/sucursales.csv"
 CICLO=0
 
 log ()
@@ -92,6 +92,7 @@ validoNovedades()
 	done
 }
 
+
 #while :
 #do
 	#Verifico que sean validos los archivos de novedades
@@ -99,20 +100,19 @@ validoNovedades()
 	let "CICLOS=CICLOS+1"
 	log "proceso" "INF" "Nº de ciclo: $CICLOS"
 
-	if [ "$(ls -A $NOVEDADES_PATH)" ]
+	if [ $(ls -A "$NOVEDADES_PATH") ]
 	then	
 		validoNombreDeNovedades
 	fi
 
-	if [ "$(ls -A $NOVEDADES_PATH)" ]
+	if [ $(ls -A "$NOVEDADES_PATH") ]
 	then	
 		validoNovedades
 	fi
 
-
 	#Por cada archivo en el directorio de aceptados
 	#Verifico que sean validos para procesar o los muevo a rechazados
-	for f in "$ACEPTADOS_PATH"/* 
+	for f in $(ls -A "$ACEPTADOS_PATH")
 	do
 	  echo "$(basename "$f")"
 	  #Vars para verificar si archivo debe ser movido a rechazados
@@ -152,7 +152,7 @@ validoNovedades()
  	#Ya tengo los archivos validados, empiezo a procesesar
 	#Es lo mismo que arriba, capaz conviene hacer todo en el mismo loop
 	#PROCESANDO EL CONTENIDO DEL ARCHIVO
-	for f in "$ACEPTADOS_PATH"/*
+	for f in $(ls -A "$ACEPTADOS_PATH")
 	do
 	  echo "procesando archivo $(basename "$f")"
 	  while IFS=';' read -r  operador pieza nombre doc_tipo doc_numero codigo_postal;

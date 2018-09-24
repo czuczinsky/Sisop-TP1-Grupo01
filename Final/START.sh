@@ -86,7 +86,7 @@ function permisoEjecutables(){
 
         START="$EJECUTABLES/START.sh"
         STOP="$EJECUTABLES/STOP.sh"
-        INICIALIZACION="$EJECUTABLES/inicializacion.sh"
+        INICIALIZACION="$EJECUTABLES/inicializador.sh"
         PROCESO="$EJECUTABLES/daemon.sh"
 
 
