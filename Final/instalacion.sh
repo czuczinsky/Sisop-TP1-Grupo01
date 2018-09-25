@@ -59,7 +59,11 @@ crear_respaldo ()
         
         log "crear_respaldo" "INF" "Creo respaldo de ejecutables (extension .sh)"
         
-        chmod -R -x "$GRUPO/respaldo/"
+        chmod -x "$GRUPO/respaldo/instalacion.sh"
+        chmod -x "$GRUPO/respaldo/inicializador.sh"
+        chmod -x "$GRUPO/respaldo/daemon.sh"
+        chmod -x "$GRUPO/respaldo/START.sh"
+        chmod -x "$GRUPO/respaldo/STOP.sh"
         
         log "crear_respaldo" "INF" "Retiro permisos del ejecucion de respaldo"
         
@@ -121,17 +125,21 @@ crear_directorios ()
 
 info_directorios ()
 {
-        echo 'Directorio raiz: '
-        echo "$GRUPO"
-        echo 'Directorio de configuracion: '
-        echo "$CONF"
-        echo 'Directorio de logs: '
-        echo "$LOG"
+        echo -n 'Directorio raiz: '
+        echo -e "\e[92m~/${GRUPO##*/}/\e[0m"
+        
+        
+        echo -n 'Directorio de configuracion: '
+        echo -e "\e[92m~/${GRUPO##*/}/${CONF##*/}\e[0m"
+        
+        
+        echo -n 'Directorio de logs: '
+        echo -e "\e[92m~/${GRUPO##*/}/${CONF##*/}/${LOG##*/}\e[0m"
 
         for i in {0..6}
         do
-                echo "Directorio de ${NOMBRES_DIR[$i]}:"
-                echo "$GRUPO/${DIRECTORIOS[$i]}"
+                echo -n "Directorio de ${NOMBRES_DIR[$i]}:"
+                echo -e "\e[92m~/${GRUPO##*/}/${DIRECTORIOS[$i]}\e[0m"
         done
 }
 
@@ -164,16 +172,18 @@ validar_directorio ()
 
 instalacion ()
 {
-        echo "Configuracion de los directorios"
-        echo "Directorios reservados conf y conf/log"
-        echo "Si no asigna una ruta se considera la ruta por defecto, la que se encuentra entre parentesis"
+        echo -e "Configuracion de los directorios"
+        echo "Directorios reservados: "
+        echo -e "\e[91m\t * ~/${GRUPO##*/}/conf\e[0m"
+        echo -e "\e[91m\t * ~/${GRUPO##*/}/conf/log\e[0m"
+        echo -e "\nSi no asigna una ruta se considera la ruta por \e[96mdefecto\e[0m, la que se encuentra entre parentesis\n"
         log "instalacion" "INF" "Configuracion de directorios"
 
         for i in {0..6}
         do
                 log "instalacion" "INF" "Ingrese directorio de ${NOMBRES_DIR[$i]}"
-                echo "Ingrese directorio de ${NOMBRES_DIR[$i]} ($GRUPO/${DIRECTORIOS[$i]}):"
-                read -p "$GRUPO/" INPUT
+                echo -ne "Ingrese directorio de ${NOMBRES_DIR[$i]} (\e[96m~/${GRUPO##*/}/${DIRECTORIOS[$i]}\e[0m): "
+                read -p "~/${GRUPO##*/}/" INPUT
                 validar_directorio "${NOMBRES_DIR[$i]}"
                 if [ "$INPUT" != "" ] && [ "$VALDIR" == "0" ]
                 then
@@ -182,14 +192,14 @@ instalacion ()
                 log "instalacion" "INF" "Directorio de ${NOMBRES_DIR[$i]}: $GRUPO/${DIRECTORIOS[$i]}"
         done
 
-        echo 'Confirmacion de la instalacion'
+        echo -e "\nConfirmacion de la instalacion\n"
         info_directorios
-        echo 'Estado de la instalcion: LISTA'
+        echo -e "\nEstado de la instalacion: LISTA\n"
         
-        log "instalacion" "INF" "Confirmacion de configuracion (s-n)"
-        read -p "La informacion ingresada es correcta (s-n): " CONFIRMACION
+        echo -ne "¿La informacion ingresada es correcta? [S/n]: "
+        read CONFIRMACION
 
-        if [ "$CONFIRMACION" == 's' ]
+        if [ "$CONFIRMACION" == 's' ] || [ "$CONFIRMACION" == 'S' ] || [ -z "$CONFIRMACION" ]
         then
                 log "instalacion" "INF" "Configuracion correcta"
                 crear_respaldo
@@ -199,13 +209,14 @@ instalacion ()
         elif [ "$CONFIRMACION" == 'n' ]
         then
                 log "instalacion" "INF" "Configuracion rechazada"
-                echo "Volviendo a iniciar instalacion"
+                echo -e "Confirmacion rechazada. Volviendo a iniciar instalacion\n"
                 log "instalacion" "INF" "Reiniciando instalacion"
+                sleep 3s
                 instalacion
         else
                 log "instalacion" "INF" "Configuracion abortada"
-                echo "Opción invalida"
-                echo "Abortando instalacion"
+                echo "Opcion invalida"
+                echo "Instalacion abortada"
                 log "instalacion" "INF" "Finalizando instalacion"
         fi
 }
@@ -217,6 +228,8 @@ modo_reparacion ()
 }
 
 # MAIN
+
+echo -e "\nBienvenido al instalador del TP de Sistemas Operativos\n"
 
 crear_directorios_reservados
 
