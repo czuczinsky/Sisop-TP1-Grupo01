@@ -184,6 +184,8 @@ procesamiento()
 	  mv $f $PROCESADOS_PATH
 
 	done
+	#Elimino el archivo que se genera por los registros trailers que contiene basura
+	rm "$SALIDA_PATH"/"Entregas_"
 }
 
 
