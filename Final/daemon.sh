@@ -193,18 +193,18 @@ do
 
 	#Verifico que sean validos los archivos de novedades
 	#Mando a aceptados o rechazados segun corresponda
-	if [ $(ls -A "$NOVEDADES_PATH") ]
+	if [ "$(ls -A "$NOVEDADES_PATH")" ]
 	then	
 		validoNombreDeNovedades
 	fi
 
-	if [ $(ls -A "$NOVEDADES_PATH") ]
+	if [ "$(ls -A "$NOVEDADES_PATH")" ]
 	then	
 		validoNovedades
 	fi
 
 	#Proceso los archivos de aceptados
-	if [ $(ls -A "$ACEPTADOS_PATH") ]
+	if [ "$(ls -A "$ACEPTADOS_PATH")" ]
 	then	
 		procesamiento
 	fi
