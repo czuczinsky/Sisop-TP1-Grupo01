@@ -75,13 +75,13 @@ mover_archivos ()
         
         log "mover_archivos" "INF" "Se mueven los archivos ejecutables a $GRUPO/${DIRECTORIOS[0]}/"
         
-        if [ -a "$GRUPO/operadores.txt"]
+        if [ -a "$GRUPO/operadores.txt" ]
         then
                 mv "operadores.txt" "$GRUPO/${DIRECTORIOS[1]}/"
                 log "mover_archivos" "INF" "Se mueve operadores.txt a $GRUPO/${DIRECTORIOS[1]}/"
         fi
         
-        if [ -a "$GRUPO/sucursales.txt"]
+        if [ -a "$GRUPO/sucursales.txt" ]
         then
                 mv "sucursales.txt" "$GRUPO/${DIRECTORIOS[1]}/"
                 log "mover_archivos" "INF" "Se mueve sucursales.txt a $GRUPO/${DIRECTORIOS[1]}/"
