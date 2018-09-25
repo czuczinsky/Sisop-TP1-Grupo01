@@ -92,27 +92,11 @@ validoNovedades()
 	done
 }
 
-
-#while :
-#do
-	#Verifico que sean validos los archivos de novedades
-	#Mando a aceptados o rechazados segun corresponda
-	let "CICLOS=CICLOS+1"
-	log "proceso" "INF" "Nº de ciclo: $CICLOS"
-
-	if [ $(ls -A "$NOVEDADES_PATH") ]
-	then	
-		validoNombreDeNovedades
-	fi
-
-	if [ $(ls -A "$NOVEDADES_PATH") ]
-	then	
-		validoNovedades
-	fi
-
+procesamiento()
+{
 	#Por cada archivo en el directorio de aceptados
 	#Verifico que sean validos para procesar o los muevo a rechazados
-	for f in $(ls -A "$ACEPTADOS_PATH")
+	for f in "$ACEPTADOS_PATH"/* 
 	do
 	  echo "$(basename "$f")"
 	  #Vars para verificar si archivo debe ser movido a rechazados
@@ -133,7 +117,7 @@ validoNovedades()
 		trailer_codigo_postal=$codigo_postal
 		trailer_cantidad_lineas=$doc_numero
 		echo "traileres" $trailer_codigo_postal " " $trailer_cantidad_lineas
-	  done < "$ACEPTADOS_PATH/$f"
+	  done < $f
 	  echo "Total lineas" $cantidad_lineas
 	  echo "Suma codigo postal" $codigo_postal_suma
 	  #Comparo cantidad de lineas del archivo y suma codigo postal con los trailers
@@ -142,17 +126,17 @@ validoNovedades()
 	  if [ $cantidad_lineas -eq $trailer_cantidad_lineas ] && [ $codigo_postal_suma -eq $trailer_codigo_postal ];
 	  then
 		echo $f " archivo valido"
-		log "proceso" "INF" "El archivo $f tiene un trailer correcto"
+		#loggear 
 	  else
 		echo $f " archivo invalido"
-		log "proceso" "INF" "El archivo $f tiene un trailer incorrecto"
-		mv $f "$RECHAZADOS_PATH"
+		mv $f $RECHAZADOS_PATH
+		#loggear
 	  fi	
 	done
  	#Ya tengo los archivos validados, empiezo a procesesar
 	#Es lo mismo que arriba, capaz conviene hacer todo en el mismo loop
 	#PROCESANDO EL CONTENIDO DEL ARCHIVO
-	for f in $(ls -A "$ACEPTADOS_PATH")
+	for f in "$ACEPTADOS_PATH"/*
 	do
 	  echo "procesando archivo $(basename "$f")"
 	  while IFS=';' read -r  operador pieza nombre doc_tipo doc_numero codigo_postal;
@@ -195,8 +179,31 @@ validoNovedades()
 	  #mv $f $PROCESADOS_PATH
 
 	done
+}
 
+
+while true
+do
 	let "CICLO=CICLO+1"
-	echo "Numero de ciclo: " $CICLO
-	#sleep 1m
-#done
+	log "proceso" "INF" "Nº de ciclo: $CICLO"
+
+	#Verifico que sean validos los archivos de novedades
+	#Mando a aceptados o rechazados segun corresponda
+	if [ $(ls -A "$NOVEDADES_PATH") ]
+	then	
+		validoNombreDeNovedades
+	fi
+
+	if [ $(ls -A "$NOVEDADES_PATH") ]
+	then	
+		validoNovedades
+	fi
+
+	#Proceso los archivos de aceptados
+	if [ $(ls -A "$ACEPTADOS_PATH") ]
+	then	
+		procesamiento
+	fi
+
+	sleep 1m
+done
