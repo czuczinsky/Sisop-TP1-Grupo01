@@ -66,15 +66,34 @@ crear_respaldo ()
 mover_archivos ()
 {
         
-        mv "inicializador.sh" "$GRUPO/${DIRECTORIOS[0]}/inicializador.sh"
-        mv "daemon.sh" "$GRUPO/${DIRECTORIOS[0]}/daemon.sh"
-        mv "START.sh" "$GRUPO/${DIRECTORIOS[0]}/START.sh"
-        mv "STOP.sh" "$GRUPO/${DIRECTORIOS[0]}/STOP.sh" 
+        mv "inicializador.sh" "$GRUPO/${DIRECTORIOS[0]}/"
+        mv "daemon.sh" "$GRUPO/${DIRECTORIOS[0]}/"
+        mv "START.sh" "$GRUPO/${DIRECTORIOS[0]}/"
+        mv "STOP.sh" "$GRUPO/${DIRECTORIOS[0]}/"
         
+        mv "operadores.csv" "$GRUPO/${DIRECTORIOS[1]}/"
+        mv "sucursales.csv" "$GRUPO/${DIRECTORIOS[1]}/"
+        
+        mv "Entregas"* "$GRUPO/${DIRECTORIOS[2]}/"
+        
+}
+
+crear_directorios_reservados ()
+{
+        if [ ! -d "$CONF" ]
+        then
+                mkdir "$CONF"
+        fi
+        
+        if [ ! -d "$LOG" ]
+        then
+                mkdir "$LOG"
+        fi
 }
 
 crear_directorios ()
 {
+        
         for i in {0..6}
         do
                 mkdir "$GRUPO/${DIRECTORIOS[$i]}"
@@ -104,12 +123,12 @@ validar_directorio ()
         VALDIR=0
         if [ "$GRUPO/$INPUT" == "$CONF" ]
         then
-                echo "*Directorio reservado. Se considera directorio por defecto."
+                echo "Directorio reservado. Se considera directorio por defecto."
                 log "validar_directorio" "ALE" "Directorio reservado. Se considera directorio por defecto."
                 VALDIR=1
         elif [ "$GRUPO/$INPUT" == "$LOG" ]
         then
-                echo "*Directorio reservado. Se considera directorio por defecto."
+                echo "Directorio reservado. Se considera directorio por defecto."
                 log "validar_directorio" "ALE" "Directorio reservado. Se considera directorio por defecto."
                 VALDIR=1
         else
@@ -181,6 +200,8 @@ modo_reparacion ()
 }
 
 # MAIN
+
+crear_directorios_reservados
 
 if [ "$#" == "0" ]
 then
