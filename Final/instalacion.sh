@@ -1,5 +1,4 @@
 # VARIABLES DE AMBIENTE
-
 # RAIZ
 GRUPO="$PWD"
 # DIRECTORIOS RESERVADOS
@@ -43,23 +42,26 @@ cargar_config ()
                 DIRECTORIOS[$i]=$(cut -d'-' -f2 'conf/tpconfig.txt' | sed -n "${j}p")
                 DIRECTORIOS[$i]="${DIRECTORIOS[$i]##*/}"
         done
+        
+        log "cargar_config" "INF" "Carga de tpconfig.txt"
 }
 
 crear_respaldo ()
 {
         
         mkdir "$GRUPO/respaldo"
+        
         cp "instalacion.sh" "$GRUPO/respaldo/instalacion.sh"
         cp "inicializador.sh" "$GRUPO/respaldo/inicializador.sh"
         cp "daemon.sh" "$GRUPO/respaldo/daemon.sh"
         cp "START.sh" "$GRUPO/respaldo/START.sh"
         cp "STOP.sh" "$GRUPO/respaldo/STOP.sh"
         
-        chmod -x "$GRUPO/respaldo/instalacion.sh"
-        chmod -x "$GRUPO/respaldo/inicializador.sh"
-        chmod -x "$GRUPO/respaldo/daemon.sh"
-        chmod -x "$GRUPO/respaldo/START.sh"
-        chmod -x "$GRUPO/respaldo/STOP.sh"
+        log "crear_respaldo" "INF" "Creo respaldo de ejecutables (extension .sh)"
+        
+        chmod -R -x "$GRUPO/respaldo/"
+        
+        log "crear_respaldo" "INF" "Retiro permisos del ejecucion de respaldo"
         
 }
 
@@ -71,10 +73,16 @@ mover_archivos ()
         mv "START.sh" "$GRUPO/${DIRECTORIOS[0]}/"
         mv "STOP.sh" "$GRUPO/${DIRECTORIOS[0]}/"
         
-        mv "operadores.csv" "$GRUPO/${DIRECTORIOS[1]}/"
-        mv "sucursales.csv" "$GRUPO/${DIRECTORIOS[1]}/"
+        log "mover_archivos" "INF" "Se mueven los archivos ejecutables a $GRUPO/${DIRECTORIOS[0]}/"
+        
+        mv "operadores.txt" "$GRUPO/${DIRECTORIOS[1]}/"
+        mv "sucursales.txt" "$GRUPO/${DIRECTORIOS[1]}/"
+        
+        log "mover_archivos" "INF" "Se mueven los archivos maestros a $GRUPO/${DIRECTORIOS[1]}/"
         
         mv "Entregas"* "$GRUPO/${DIRECTORIOS[2]}/"
+        
+        log "mover_archivos" "INF" "Se mueven los archivos entregas a $GRUPO/${DIRECTORIOS[2]}/"
         
 }
 
@@ -97,7 +105,7 @@ crear_directorios ()
         for i in {0..6}
         do
                 mkdir "$GRUPO/${DIRECTORIOS[$i]}"
-                date +"%x %X-$USER-crear_directorios-INF-Creando directorio $GRUPO/${DIRECTORIOS[$i]}" >> "$LOG/instalacion.log"
+                log "crear_directorios" "INF" "Creacion de directorio $GRUPO/${DIRECTORIOS[$i]}"
         done
 
 }
