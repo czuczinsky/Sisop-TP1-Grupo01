@@ -125,25 +125,25 @@ function existenDirectorios(){
 if [ `variablesInicializadas` -eq 1 ] ; then
 	echo "Error: Variables no inicializadas"
 	log "START" "ERR" "Variables de ambiente no se encuentran inicializadas"
-	return 1 
+	exit 1 
 fi
 
 if [ `existenDirectorios` -eq 1 ] ; then
         echo "Error: Directorios necesarios no se encuentran disponibles"
         log "START" "ERR" "Directorios necesarios no se encuentran disponibles"
-        return 1
+        exit 1
 fi
 
 if [ `permisoEjecutables` -eq 1 ] ; then
         echo "Error: Los ejecutables no tienen permiso de ejecución"
         log "START" "ERR" "Los ejecutables no tienen permiso de ejecución"
-        return 1
+        exit 1
 fi
 
 if [ `existenArchivosMaestros` -eq 1 ] ; then
         echo "Error: Archivos maestros no disponibles/accesibles"
         log "START" "ERR" "Archivos maestros no existen o no tienen permiso de lectura"
-	return 1
+	exit  1
 fi
 
 
