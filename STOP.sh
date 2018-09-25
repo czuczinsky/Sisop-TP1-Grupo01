@@ -33,11 +33,11 @@ function obtenerPIDProceso(){
 	echo $PID
 }
 
-PIDBUSCADO=`obtenerPIDProceso daemon.sh`
+PID_BUSCADO=`obtenerPIDProceso daemon.sh`
 
-if [ "$PIDBUSCADO" != "" ] ; then 
+if [ "$PID_BUSCADO" != "" ] ; then 
 	
-    kill -9 $PIDBUSCADO
+    kill -9 $PID_BUSCADO
     echo "El Demonio con PID $PID_BUSCADO se ha detenido correctamente"
     log "STOP" "INF" "El Demonio con PID $PID_BUSCADO se ha detenido correctamente"
 else 
