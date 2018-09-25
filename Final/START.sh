@@ -10,6 +10,10 @@
 #se realizó con éxito 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+if [ $PWD = $EJECUTABLES ] ; then
+        cd ..
+fi
+
 #RAIZ
 GRUPO="$PWD"
 # DIRECTORIOS RESERVADOS
