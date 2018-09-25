@@ -228,8 +228,35 @@ instalacion ()
 
 modo_reparacion ()
 {
+        echo "Ejecutando reparacion"
+        log "modo_reparacion" "INF" "El usuario ejecuta el modo reparacion"
+
         cargar_config
-        # Copiar archivos
+        
+        for i in $(ls "$GRUPO/respaldo/")
+        do
+                FALTA_ARCHIVO=1
+                for j in $(ls "$GRUPO/${DIRECTORIOS[0]}")
+                do
+                        if [ "$j" == "$i" ] || [ "$i" == "instalacion.sh" ]
+                        then
+                                FALTA_ARCHIVO=0
+                        fi
+                done
+                if [ $FALTA_ARCHIVO == 1 ]
+                then
+                        echo -e "\e[91mFalta archivo:\e[0m $i"
+                        log "modo_reparacion" "INF" "Falta archivo: $i"
+                        cp "$GRUPO/respaldo/$i" "$GRUPO/${DIRECTORIOS[0]}/"
+                        log "modo_reparacion" "INF" "Copiando $GRUPO/respaldo/$i a $GRUPO/${DIRECTORIOS[0]}"
+                        chmod +x "$GRUPO/${DIRECTORIOS[0]}/$i"
+                        log "modo_reparacion" "INF" "Se otorgan permisos de ejecucion a $GRUPO/${DIRECTORIOS[0]}/$i"
+                        echo -e "\e[92mArreglado:\e[0m $i"
+                fi
+        done
+
+        echo "Reparacion finalizada"
+        log "modo_reparacion" "INF" "Reparacion finalizada"
 }
 
 # MAIN
@@ -250,9 +277,7 @@ then
         fi
 elif [ "$#" == "1" ] && [ "$1" == "-r" ] && [ -e "conf/tpconfig.txt" ]
 then
-        # reparacion
         modo_reparacion
 else
-        #mensaje de ayuda
         echo "Mensaje de ayuda"
 fi
