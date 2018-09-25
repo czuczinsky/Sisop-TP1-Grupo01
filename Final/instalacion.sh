@@ -75,14 +75,23 @@ mover_archivos ()
         
         log "mover_archivos" "INF" "Se mueven los archivos ejecutables a $GRUPO/${DIRECTORIOS[0]}/"
         
-        mv "operadores.txt" "$GRUPO/${DIRECTORIOS[1]}/"
-        mv "sucursales.txt" "$GRUPO/${DIRECTORIOS[1]}/"
+        if [ -a "$GRUPO/operadores.txt"]
+        then
+                mv "operadores.txt" "$GRUPO/${DIRECTORIOS[1]}/"
+                log "mover_archivos" "INF" "Se mueve operadores.txt a $GRUPO/${DIRECTORIOS[1]}/"
+        fi
         
-        log "mover_archivos" "INF" "Se mueven los archivos maestros a $GRUPO/${DIRECTORIOS[1]}/"
+        if [ -a "$GRUPO/sucursales.txt"]
+        then
+                mv "sucursales.txt" "$GRUPO/${DIRECTORIOS[1]}/"
+                log "mover_archivos" "INF" "Se mueve sucursales.txt a $GRUPO/${DIRECTORIOS[1]}/"
+        fi
         
-        mv "Entregas"* "$GRUPO/${DIRECTORIOS[2]}/"
-        
-        log "mover_archivos" "INF" "Se mueven los archivos entregas a $GRUPO/${DIRECTORIOS[2]}/"
+        if [ "$(ls -A "$GRUPO"/Entregas_*)" ]
+        then
+                mv "Entregas"* "$GRUPO/${DIRECTORIOS[2]}/"
+                log "mover_archivos" "INF" "Se mueven los archivos entregas a $GRUPO/${DIRECTORIOS[2]}/"
+        fi
         
 }
 
