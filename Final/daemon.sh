@@ -131,19 +131,16 @@ procesamiento()
 	do
 	  while IFS=';' read -r  operador pieza nombre doc_tipo doc_numero codigo_postal;
 	  do
-	  	#Verificar que el operador exista en archivo operadores
-		if  grep -q $operador "$ARCHIVO_OPERADORES" ;
+		registroValido=1	  	
+		#Verificar que el operador exista en archivo operadores
+		if  ! ( grep -q $operador "$ARCHIVO_OPERADORES" ) ;
 		then
-			registroValido=1
-		else
 			motivo="Su operador no se encuentra en el archivo de operadores"
 			registroValido=0
 		fi
 		#verificar que operador codigo postal en sucursales
-		if  grep -q "$operador\|$codigo_postal" "$ARCHIVO_SUCURSALES" ;
+		if  ! ( grep -q "$operador\|$codigo_postal" "$ARCHIVO_SUCURSALES" ) ;
 		then
-			registroValido=1
-		else
 			motivo="Operador-Codigo Postal no existe en sucursales"
 			registroValido=0
 		fi
