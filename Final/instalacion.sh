@@ -48,8 +48,10 @@ cargar_config ()
 
 crear_respaldo ()
 {
-        
-        mkdir "$GRUPO/respaldo"
+        if [ ! -d "$GRUPO/respaldo" ]
+        then
+                mkdir "$GRUPO/respaldo"
+        fi
         
         cp "instalacion.sh" "$GRUPO/respaldo/instalacion.sh"
         cp "inicializador.sh" "$GRUPO/respaldo/inicializador.sh"
@@ -91,7 +93,7 @@ mover_archivos ()
                 log "mover_archivos" "INF" "Se mueve sucursales.txt a $GRUPO/${DIRECTORIOS[1]}/"
         fi
         
-        if [ "$(ls -A "$GRUPO"/Entregas_*)" ]
+        if [ ! -z "$(ls "$GRUPO" | grep 'Entregas_..')" ]
         then
                 mv "Entregas"* "$GRUPO/${DIRECTORIOS[2]}/"
                 log "mover_archivos" "INF" "Se mueven los archivos entregas a $GRUPO/${DIRECTORIOS[2]}/"
@@ -117,8 +119,11 @@ crear_directorios ()
         
         for i in {0..6}
         do
-                mkdir "$GRUPO/${DIRECTORIOS[$i]}"
-                log "crear_directorios" "INF" "Creacion de directorio $GRUPO/${DIRECTORIOS[$i]}"
+                if [ ! -d "$GRUPO/${DIRECTORIOS[$i]}" ]
+                then
+                        mkdir "$GRUPO/${DIRECTORIOS[$i]}"
+                        log "crear_directorios" "INF" "Creacion de directorio $GRUPO/${DIRECTORIOS[$i]}"
+                fi
         done
 
 }
@@ -237,6 +242,7 @@ if [ "$#" == "0" ]
 then
         if [ -e "conf/tpconfig.txt" ]
         then
+                echo -e "Sistema ya instalado"
                 cargar_config
                 info_directorios
         else
