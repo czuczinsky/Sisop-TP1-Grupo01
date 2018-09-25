@@ -157,7 +157,7 @@ if [ -z "$PID_BUSCADO" ] ; then
         #. "$EJECUTABLES/daemon.sh" &
 	bash "$EJECUTABLES/daemon.sh" &
 	PID_BUSCADO=`obtenerPIDProceso daemon.sh`
-	echo "El Demonio ha sido iniciado  bajo el PID: $PID_BUSCADO"
+	echo "El Demonio ha sido iniciado bajo el PID: $PID_BUSCADO"
 	log "START" "INF" "El Demonio ha sido iniciado  bajo el PID: $PID_BUSCADO"
 else 
         echo "Error: Demonio ya ejecutado bajo PID: $PID_BUSCADO"
