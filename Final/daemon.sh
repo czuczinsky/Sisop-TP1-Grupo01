@@ -129,24 +129,33 @@ procesamiento()
 	#PROCESANDO EL CONTENIDO DEL ARCHIVO
 	for f in "$ACEPTADOS_PATH"/*
 	do
-	  echo "procesando archivo $(basename "$f")"
 	  while IFS=';' read -r  operador pieza nombre doc_tipo doc_numero codigo_postal;
 	  do
 	  	#Verificar que el operador exista en archivo operadores
 		if  grep -q $operador "$ARCHIVO_OPERADORES" ;
 		then
-			echo "operador " $operador " se encuentra en archivo de operadores" 
+			registroValido=1
 		else
-			echo "operador " $operador " no se encuentra en el archivo de operadores"
+			motivo="Su operador no se encuentra en el archivo de operadores"
+			registroValido=0
 		fi
 		#verificar que operador codigo postal en sucursales
 		if  grep -q "$operador\|$codigo_postal" "$ARCHIVO_SUCURSALES" ;
 		then
-			echo "operador y codigo postal " $operador "-" $codigo_postal " se encuentra en archivo de sucursales" 
+			registroValido=1
 		else
-			echo "operador " $operador "-" $codigo_postal " no se encuentra en el archivo de sucursales"
+			motivo="Operador-Codigo Postal no existe en sucursales"
+			registroValido=0
 		fi
-		#verificar operador vigente
+		#falta verificar operador vigente
+
+
+		if (( registroValido  == 1 ))
+		then
+			log "proceso" "INF" "Pieza aceptada: $pieza Operador: $operador Codigo Postal: $codigo_postal"
+		else
+			log "proceso" "INF" "Pieza rechazada: $pieza Operador: $operador Codigo Postal: $codigo_postal Motivo: $motivo"
+		fi
 
 		#si ok, genero o agrego a archivo correspondiente y escribo registro en el archivo
 		#completo con ceros
@@ -164,7 +173,12 @@ procesamiento()
 		printf -v direccion_suc_destino '%25s' "$direccion_suc_destino"
 		costo_entrega=$(awk -v codigo=$codigo_postal -F ";" '{ if($6 == codigo) {print $8 } }' "$ARCHIVO_SUCURSALES")
 		printf -v costo_entrega '%06d' $costo_entrega
-		echo $pieza"$nombre_pad"$doc_tipo$doc_numero$codigo_postal"$codigo_suc_destino""$suc_destino""$direccion_suc_destino"$costo_entrega$archivo >> $SALIDA_PATH/"Entregas_"$operador
+		if (( registroValido  == 1 ))
+		then
+			echo $pieza"$nombre_pad"$doc_tipo$doc_numero$codigo_postal"$codigo_suc_destino""$suc_destino""$direccion_suc_destino"$costo_entrega$archivo >> $SALIDA_PATH/"Entregas_"$operador
+		else
+			echo $pieza"$nombre_pad"$doc_tipo$doc_numero$codigo_postal"$codigo_suc_destino""$suc_destino""$direccion_suc_destino"$costo_entrega$archivo >> $SALIDA_PATH/"Entregas_Rechazadas"
+		fi
 	  done < $f
 	  #Fin proceso, mover archivo a procesado
 	  mv $f $PROCESADOS_PATH
