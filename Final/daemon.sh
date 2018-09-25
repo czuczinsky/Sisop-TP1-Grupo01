@@ -98,7 +98,6 @@ procesamiento()
 	#Verifico que sean validos para procesar o los muevo a rechazados
 	for f in "$ACEPTADOS_PATH"/* 
 	do
-	  echo "$(basename "$f")"
 	  #Vars para verificar si archivo debe ser movido a rechazados
 	  cantidad_lineas=-1 #no se porque me cuenta una linea de mas
 	  codigo_postal_suma=0
@@ -109,30 +108,22 @@ procesamiento()
 	  #sino, muevo el archivo a rechazados
 	  while IFS=';' read -r  operador pieza nombre doc_tipo doc_numero codigo_postal;
 	  do
-		echo $cantidad_lineas
-		echo $codigo_postal_suma
 		let "cantidad_lineas=cantidad_lineas + 1"
 		let "codigo_postal_suma=codigo_postal_suma + codigo_postal"
-		echo "ultima linea" $doc_numero $codigo_postal
 		trailer_codigo_postal=$codigo_postal
 		trailer_cantidad_lineas=$doc_numero
-		echo "traileres" $trailer_codigo_postal " " $trailer_cantidad_lineas
 	  done < $f
-	  echo "Total lineas" $cantidad_lineas
-	  echo "Suma codigo postal" $codigo_postal_suma
 	  #Comparo cantidad de lineas del archivo y suma codigo postal con los trailers
 	  let "codigo_postal_suma=codigo_postal_suma -trailer_codigo_postal " #le resto porque me suma el ultimo dos veces
-	  echo codigo_postal_suma
 	  if [ $cantidad_lineas -eq $trailer_cantidad_lineas ] && [ $codigo_postal_suma -eq $trailer_codigo_postal ];
 	  then
-		echo $f " archivo valido"
-		#loggear 
+		log "proceso" "INF" "El trailer de $f es correcto"
 	  else
-		echo $f " archivo invalido"
+		log "proceso" "INF" "El trailer de $f es incorrecto"
 		mv $f $RECHAZADOS_PATH
-		#loggear
 	  fi	
 	done
+
  	#Ya tengo los archivos validados, empiezo a procesesar
 	#Es lo mismo que arriba, capaz conviene hacer todo en el mismo loop
 	#PROCESANDO EL CONTENIDO DEL ARCHIVO
@@ -176,7 +167,7 @@ procesamiento()
 		echo $pieza"$nombre_pad"$doc_tipo$doc_numero$codigo_postal"$codigo_suc_destino""$suc_destino""$direccion_suc_destino"$costo_entrega$archivo >> $SALIDA_PATH/"Entregas_"$operador
 	  done < $f
 	  #Fin proceso, mover archivo a procesado
-	  #mv $f $PROCESADOS_PATH
+	  mv $f $PROCESADOS_PATH
 
 	done
 }
