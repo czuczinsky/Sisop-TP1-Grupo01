@@ -154,12 +154,13 @@ PID_BUSCADO=`obtenerPIDProceso daemon.sh`
 #si no esta corriendo hago que empiece a correr
 if [ -z "$PID_BUSCADO" ] ; then
     
-    . "$EJECUTABLES/daemon.sh" &
+        #. "$EJECUTABLES/daemon.sh" &
+	bash "$EJECUTABLES/daemon.sh" &
 	PID_BUSCADO=`obtenerPIDProceso daemon.sh`
+	echo "El Demonio ha sido iniciado  bajo el PID: $PID_BUSCADO"
 	log "START" "INF" "El Demonio ha sido iniciado  bajo el PID: $PID_BUSCADO"
 else 
         echo "Error: Demonio ya ejecutado bajo PID: $PID_BUSCADO"
 	log "START" "ERR" "El demonio ya se encuentra corriendo bajo el PID: $PID_BUSCADO"
 
 fi
-
