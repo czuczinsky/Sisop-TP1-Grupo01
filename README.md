@@ -35,7 +35,7 @@
 
 # Uso
 - Con el proceso daemon funcionando, se puede detener ubicandose en el directorio ejecutables y escribiendo el comando ./STOP.SH el cual informa si sea ha detenido el proceso o si no había proceso funcionando que detener.
-- Para volver a iniciar el proceso daemon, ubicado en el directorio ejecutables, ingrese el comando .START.SH el cual volverá a poner en funcionamiento el proceso daemon, siempre y cuando estén dadas las condiciones (variables inicializadas, directorios y archivos maestros disponibles/accesibles). En caso de que ya se encuentre un proceso daemon corriendo, no se correra uno adicional y se informará de la situación.
+- Para volver a iniciar el proceso daemon, ubicado en el directorio ejecutables, ingrese el comando ./START.SH el cual volverá a poner en funcionamiento el proceso daemon, siempre y cuando estén dadas las condiciones (variables inicializadas, directorios y archivos maestros disponibles/accesibles). En caso de que ya se encuentre un proceso daemon corriendo, no se correra uno adicional y se informará de la situación.
 
 
 # Estructuras
