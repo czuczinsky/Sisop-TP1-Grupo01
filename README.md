@@ -43,9 +43,25 @@
 - maestros/Sucursales.txt
 - Grupo01/conf/tpconfig.txt
 
-# Listado de archivos de prueba
+# Listado de archivos de prueba dados por la cátedra
 - novedades/entregas_03.txt
 - novedades/entregas_04.txt
 - novedades/entregas_05.txt
 - novedades/entregas_06.txt
 - novedades/entregas_07.txt
+
+# Listado de archivos de prueba del grupo
+RECHAZADOS POR TENER UN MAL NOMBRE
+- Entergas_01.txt
+- Entregas 01.txt
+- Entregas_001.txt
+- Entregas_13.txt
+- Entregas_12.txt
+- Entregas_00.txt
+- Entregas-01.txt
+
+RECHAZADOS POR ESTAR VACIO
+- Entregas_02.txt
+
+RECHAZADO POR SER UN PDF
+- Entregas_02.pdf
