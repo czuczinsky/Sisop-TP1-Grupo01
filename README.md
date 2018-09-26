@@ -10,18 +10,19 @@
 - Descargar el paquete llamado Grupo01.tgz del siguiente link: https://github.com/czuczinsky/Sisop-TP1-Grupo01
 - Mover el paquete a la ubicación que usted desee.
 - Abrir la terminal en la ubicación elegida y ejecutar el comando tar -zxvf Grupo01.tgz
-- Se obtendrá un directorio llamado Grupo01 que contiene los comandos, archivos maestros.
+- Se obtendrá dentro de la ubicacin los comandos y archivos maestros.
 
 
 
 # Instalación
-- Ubicado en el directorio Grupo01, ejecutar por la terminal el comando ./instalacion.sh
+- Ubicado en el directorio elegido, ejecutar por la terminal el comando ./instalacion.sh
+- Se observará una pantalla de bienvenida y se crearan las carpetas conf y cong/log.
 - Se pedira configurar los directorios de ejecutables, maestros, novedades, aceptados, rechazados, procesados, salida. Usted podrá ingresar una ruta, y si no ingresa una se asignará una ruta por defecto.
 - Se pedirá una confirmación de la información ingresada. Si ingresa s se completará la instalación y si ingresa n se volverán a solicitar los directorios.
 
 (Nota: si el sistema ya ha sido correctamente instalado, la ejecución del comando ./instalacion.sh solo mostrará los directorios de la instalación)
 
-- Para reparar el sistema ingrese al directorio Grupo01 y ejecute el comando ./instalacion.sh -r
+- Para reparar el sistema ingrese al directorio de la instalación y ejecute el comando ./instalacion.sh -r
 
 
 
