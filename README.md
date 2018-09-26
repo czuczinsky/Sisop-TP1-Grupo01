@@ -44,11 +44,11 @@
 - Grupo01/conf/tpconfig.txt
 
 # Listado de archivos de prueba dados por la cátedra
-- novedades/entregas_03.txt
-- novedades/entregas_04.txt
-- novedades/entregas_05.txt
-- novedades/entregas_06.txt
-- novedades/entregas_07.txt
+- entregas_03.txt
+- entregas_04.txt
+- entregas_05.txt
+- entregas_06.txt
+- entregas_07.txt
 
 # Listado de archivos de prueba del grupo
 RECHAZADOS POR TENER UN MAL NOMBRE
@@ -67,7 +67,7 @@ RECHAZADO POR SER UN PDF
 - Entregas_02.pdf
 
 RECHAZADO POR TRAILER INCORRECTO
-- Entregas_02(1).txt No posee trailer
-- Entregas_02(2).txt Incorrecta cantidad de registros.
-- Entregas_02(3).txt No posee trailer Incorrecta sumatoria de codigo postal
+- Entregas_07.txt No posee trailer
+- Entregas_08.txt Incorrecta cantidad de registros.
+- Entregas_09.txt No posee trailer Incorrecta sumatoria de codigo postal
 
