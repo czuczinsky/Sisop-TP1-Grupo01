@@ -3,7 +3,8 @@
 # Grupo 01 - 2º Cuatrimestre del 2018
 ********************************************
 
-
+# Requisitos del Sistema
+- Se requiere tener instalado Bash en el sistema.
 
 
 # Descarga y descompresión del sistema
@@ -18,9 +19,9 @@
 - Ubicado en el directorio elegido, ejecutar por la terminal el comando ./instalacion.sh
 - Se observará una pantalla de bienvenida y se crearan las carpetas conf y cong/log.
 - Se pedira configurar los directorios de ejecutables, maestros, novedades, aceptados, rechazados, procesados, salida. Usted podrá ingresar una ruta, y si no ingresa una se asignará una ruta por defecto.
-- Se pedirá una confirmación de la información ingresada. Si ingresa s se completará la instalación creando todos los directorios mencionados y ubicando los script y archivos maestros donde corresponden. Y si ingresa n se volverán a solicitar los directorios.
+- Se pedirá una confirmación de la información ingresada. Si ingresa s se completará la instalación creando todos los directorios mencionados y ubicando los script y archivos maestros donde corresponden. Y si ingresa n volverá a comenzar la instalación y se pedirá nuevamente que se configuren los directorios.
 
-(Nota: si el sistema ya ha sido correctamente instalado, la ejecución del comando ./instalacion.sh solo mostrará los directorios de la instalación)
+(Nota: si el sistema ya ha sido correctamente instalado, la ejecución del comando ./instalacion.sh informará la situación e informará los directorios de la instalación)
 
 - Para reparar el sistema ingrese al directorio de la instalación y ejecute el comando ./instalacion.sh -r
 
