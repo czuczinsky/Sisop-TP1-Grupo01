@@ -3,17 +3,14 @@
 # Grupo 01 - 2º Cuatrimestre del 2018
 ********************************************
 
-# Requisitos del sistema
-¿Se requiere algo?
-
 
 
 
 # Descarga y descompresión del sistema
-- Descargar el paquete llamado Grupo01.tgz del siguiente link:
+- Descargar el paquete llamado Grupo01.tgz del siguiente link: https://github.com/czuczinsky/Sisop-TP1-Grupo01
 - Mover el paquete a la ubicación que usted desee.
 - Abrir la terminal en la ubicación elegida y ejecutar el comando tar -zxvf Grupo01.tgz
-- Se obtendrá un directorio llamado Grupo01 que contiene los comandos, archivos maestros y dos subdirectorio llamados /conf y /conf/log.
+- Se obtendrá un directorio llamado Grupo01 que contiene los comandos, archivos maestros.
 
 
 
