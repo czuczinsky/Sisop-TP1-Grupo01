@@ -1,0 +1,48 @@
+26/09/18 00:25:54-eleonora-instalacion-INF-Configuracion de directorios
+26/09/18 00:25:54-eleonora-instalacion-INF-Ingrese directorio de ejecutables
+26/09/18 00:26:11-eleonora-instalacion-INF-Directorio de ejecutables: /home/eleonora/CORRIDA/mis ejecutables
+26/09/18 00:26:11-eleonora-instalacion-INF-Ingrese directorio de maestros
+26/09/18 00:26:20-eleonora-instalacion-INF-Directorio de maestros: /home/eleonora/CORRIDA/mis archivos
+26/09/18 00:26:20-eleonora-instalacion-INF-Ingrese directorio de novedades
+26/09/18 00:26:23-eleonora-validar_directorio-ALE-Directorio repetido. Se considera directorio por defecto.
+26/09/18 00:26:23-eleonora-instalacion-INF-Directorio de novedades: /home/eleonora/CORRIDA/novedades
+26/09/18 00:26:23-eleonora-instalacion-INF-Ingrese directorio de aceptados
+26/09/18 00:26:29-eleonora-validar_directorio-ALE-Directorio reservado. Se considera directorio por defecto.
+26/09/18 00:26:29-eleonora-instalacion-INF-Directorio de aceptados: /home/eleonora/CORRIDA/aceptados
+26/09/18 00:26:29-eleonora-instalacion-INF-Ingrese directorio de rechazados
+26/09/18 00:26:40-eleonora-instalacion-INF-Directorio de rechazados: /home/eleonora/CORRIDA/rechazados
+26/09/18 00:26:40-eleonora-instalacion-INF-Ingrese directorio de procesados
+26/09/18 00:26:41-eleonora-instalacion-INF-Directorio de procesados: /home/eleonora/CORRIDA/procesados
+26/09/18 00:26:41-eleonora-instalacion-INF-Ingrese directorio de salida
+26/09/18 00:26:41-eleonora-instalacion-INF-Directorio de salida: /home/eleonora/CORRIDA/salida
+26/09/18 00:26:45-eleonora-instalacion-INF-Configuracion rechazada
+26/09/18 00:26:45-eleonora-instalacion-INF-Reiniciando instalacion
+26/09/18 00:26:48-eleonora-instalacion-INF-Configuracion de directorios
+26/09/18 00:26:48-eleonora-instalacion-INF-Ingrese directorio de ejecutables
+26/09/18 00:26:54-eleonora-instalacion-INF-Directorio de ejecutables: /home/eleonora/CORRIDA/mis ejecutables
+26/09/18 00:26:54-eleonora-instalacion-INF-Ingrese directorio de maestros
+26/09/18 00:26:54-eleonora-instalacion-INF-Directorio de maestros: /home/eleonora/CORRIDA/mis archivos
+26/09/18 00:26:54-eleonora-instalacion-INF-Ingrese directorio de novedades
+26/09/18 00:26:54-eleonora-instalacion-INF-Directorio de novedades: /home/eleonora/CORRIDA/novedades
+26/09/18 00:26:54-eleonora-instalacion-INF-Ingrese directorio de aceptados
+26/09/18 00:26:55-eleonora-instalacion-INF-Directorio de aceptados: /home/eleonora/CORRIDA/aceptados
+26/09/18 00:26:55-eleonora-instalacion-INF-Ingrese directorio de rechazados
+26/09/18 00:26:55-eleonora-instalacion-INF-Directorio de rechazados: /home/eleonora/CORRIDA/rechazados
+26/09/18 00:26:55-eleonora-instalacion-INF-Ingrese directorio de procesados
+26/09/18 00:26:55-eleonora-instalacion-INF-Directorio de procesados: /home/eleonora/CORRIDA/procesados
+26/09/18 00:26:55-eleonora-instalacion-INF-Ingrese directorio de salida
+26/09/18 00:26:57-eleonora-instalacion-INF-Directorio de salida: /home/eleonora/CORRIDA/salida
+26/09/18 00:27:02-eleonora-instalacion-INF-Configuracion correcta
+26/09/18 00:27:02-eleonora-crear_respaldo-INF-Creo respaldo de ejecutables (extension .sh)
+26/09/18 00:27:02-eleonora-crear_respaldo-INF-Retiro permisos del ejecucion de respaldo
+26/09/18 00:27:02-eleonora-crear_directorios-INF-Creacion de directorio /home/eleonora/CORRIDA/mis ejecutables
+26/09/18 00:27:02-eleonora-crear_directorios-INF-Creacion de directorio /home/eleonora/CORRIDA/mis archivos
+26/09/18 00:27:02-eleonora-crear_directorios-INF-Creacion de directorio /home/eleonora/CORRIDA/novedades
+26/09/18 00:27:02-eleonora-crear_directorios-INF-Creacion de directorio /home/eleonora/CORRIDA/aceptados
+26/09/18 00:27:02-eleonora-crear_directorios-INF-Creacion de directorio /home/eleonora/CORRIDA/rechazados
+26/09/18 00:27:02-eleonora-crear_directorios-INF-Creacion de directorio /home/eleonora/CORRIDA/procesados
+26/09/18 00:27:02-eleonora-crear_directorios-INF-Creacion de directorio /home/eleonora/CORRIDA/salida
+26/09/18 00:27:02-eleonora-crear_config-INF-Creacion de tpconfig.txt
+26/09/18 00:27:02-eleonora-mover_archivos-INF-Se mueven los archivos ejecutables a /home/eleonora/CORRIDA/mis ejecutables/
+26/09/18 00:27:02-eleonora-mover_archivos-INF-Se mueve operadores.txt a /home/eleonora/CORRIDA/mis archivos/
+26/09/18 00:27:02-eleonora-mover_archivos-INF-Se mueve sucursales.txt a /home/eleonora/CORRIDA/mis archivos/

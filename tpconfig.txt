@@ -1,0 +1,10 @@
+GRUPO-/home/eleonora/CORRIDA-eleonora-26/09/18 00:27:02
+CONF-/home/eleonora/CORRIDA/conf-eleonora-26/09/18 00:27:02
+LOG-/home/eleonora/CORRIDA/conf/log-eleonora-26/09/18 00:27:02
+EJECUTABLES-/home/eleonora/CORRIDA/mis ejecutables-26/09/18 00:27:02
+MAESTROS-/home/eleonora/CORRIDA/mis archivos-26/09/18 00:27:02
+NOVEDADES-/home/eleonora/CORRIDA/novedades-26/09/18 00:27:02
+ACEPTADOS-/home/eleonora/CORRIDA/aceptados-26/09/18 00:27:02
+RECHAZADOS-/home/eleonora/CORRIDA/rechazados-26/09/18 00:27:02
+PROCESADOS-/home/eleonora/CORRIDA/procesados-26/09/18 00:27:02
+SALIDA-/home/eleonora/CORRIDA/salida-26/09/18 00:27:02
