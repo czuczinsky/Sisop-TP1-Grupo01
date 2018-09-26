@@ -157,6 +157,7 @@ procesamiento()
                                 if [ "$operador" == "$o_cod_op" ] && [ $mes_i -le $mes_c ] && [ $mes_f -ge $mes_c ]
                                 then
                                         registroValido=1
+                                        log "procesamiento" "INF" "Se encontro $operador en operadores.txt, activo desde $mes_i hasta $mes_f"
                                         break;
                                 fi
                         done < "$ARCHIVO_OPERADORES"
@@ -171,6 +172,7 @@ procesamiento()
                                 if [ "$operador" == "$s_cod_op" ] && [ "$codigo_postal" == "$s_cod_pos" ]
                                 then
                                         registroValido=1
+                                        log "procesamiento" "INF" "Se encontro dupla $operador-$codigo_postal en sucursales.txt"
                                         break;
                                 fi
                         done < "$ARCHIVO_SUCURSALES"
