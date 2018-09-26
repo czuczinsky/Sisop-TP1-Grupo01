@@ -121,7 +121,7 @@ procesamiento()
 	  else
 		log "proceso" "INF" "El trailer de $f es incorrecto"
 		mv $f $RECHAZADOS_PATH
-	  fi	
+	  fi
 	done
 
  	#Ya tengo los archivos validados, empiezo a procesesar
@@ -144,8 +144,37 @@ procesamiento()
 			motivo="Operador-Codigo Postal no existe en sucursales"
 			registroValido=0
 		fi
-		#falta verificar operador vigente
-
+		
+                #Verifico si existe el OP en operadores.txt y si tiene contrato vigente
+                if [ $registroValido == 1 ]
+                then
+                        registroValido=0
+                        while IFS=';' read -r o_cod_op o_nom_op o_cuit o_fi o_ff;
+                        do
+                                mes_i=$(echo "$o_fi" | cut -d'/' -f2)
+                                mes_f=$(echo "$o_ff" | cut -d'/' -f2)
+                                mes_c=$(date +"%m")
+                                if [ "$operador" == "$o_cod_op" ] && [ $mes_i -le $mes_c ] && [ $mes_f -ge $mes_c ]
+                                then
+                                        registroValido=1
+                                        break;
+                                fi
+                        done < "$ARCHIVO_OPERADORES"
+                fi
+                
+                # Verifico que la dupla operador-codigo postal exista
+                if [ $registroValido == 1 ]
+                then
+                        registroValido=0
+                        while IFS=';' read -r s_cod_suc s_nom_suc s_dom s_loc s_pro s_cod_pos s_cod_op s_precio;
+                        do
+                                if [ "$operador" == "$s_cod_op" ] && [ "$codigo_postal" == "$s_cod_pos" ]
+                                then
+                                        registroValido=1
+                                        break;
+                                fi
+                        done < "$ARCHIVO_SUCURSALES"
+                fi
 
 		if (( registroValido  == 1 ))
 		then
@@ -181,8 +210,6 @@ procesamiento()
 	  mv $f $PROCESADOS_PATH
 
 	done
-	#Elimino el archivo que se genera por los registros trailers que contiene basura
-	rm "$SALIDA_PATH"/"Entregas_"
 }
 
 
