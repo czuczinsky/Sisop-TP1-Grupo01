@@ -65,3 +65,9 @@ RECHAZADOS POR ESTAR VACIO
 
 RECHAZADO POR SER UN PDF
 - Entregas_02.pdf
+
+RECHAZADO POR TRAILER INCORRECTO
+- Entregas_02(1).txt No posee trailer
+- Entregas_02(2).txt Incorrecta cantidad de registros.
+- Entregas_02(3).txt No posee trailer Incorrecta sumatoria de codigo postal
+
